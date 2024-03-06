@@ -13,9 +13,9 @@ install_osquery() {
 
 # Install Webmin
 install_webmin() {
-    sudo sh -c 'echo "deb https://download.webmin.com/download/repository sarge contrib" > /etc/apt/sources.list.d/webmin.list'
-    wget -q -O- http://www.webmin.com/jcameron-key.asc | sudo apt-key add -
-    sudo apt update
+    sudo sh -c 'echo "deb https://download.webmin.com/download/repository sarge contrib" > /etc/apt/sources.list.d/webmin.list' &&
+    wget -q -O- http://www.webmin.com/jcameron-key.asc | sudo apt-key add - &&
+    sudo apt update &&
     sudo apt install -y webmin
 }
 
@@ -31,7 +31,7 @@ install_openvpn_server() {
 
 # Install OSSEC/Wazuh
 install_ossec_wazuh() {
-    curl -so /tmp/wazuh-agent.deb https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.2.4-1_amd64.deb
+    curl -so /tmp/wazuh-agent.deb https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.2.4-1_amd64.deb &&
     sudo dpkg -i /tmp/wazuh-agent.deb
 }
 
@@ -42,7 +42,7 @@ install_rancher() {
 
 # Install Docker
 install_docker() {
-    curl -fsSL https://get.docker.com -o /tmp/get-docker.sh
+    curl -fsSL https://get.docker.com -o /tmp/get-docker.sh &&
     sudo sh /tmp/get-docker.sh
 }
 
@@ -61,26 +61,4 @@ install_snort() {
     install_package snort
 }
 
-# Configure iptables
-configure_iptables() {
-    # Add rules to iptables as needed
-    # Example: sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT
-}
-
-# Main function to install all tools
-install_all() {
-    install_osquery
-    install_webmin
-    install_ssh_server
-    install_openvpn_server
-    install_ossec_wazuh
-    install_rancher
-    install_docker
-    install_nmap
-    install_openvas
-    install_snort
-    configure_iptables
-}
-
-# Call the main function to install all tools
-install_all
+# Config

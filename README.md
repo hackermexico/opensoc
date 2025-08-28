@@ -44,3 +44,42 @@ Detención y deshabilitación de servicios (systemctl stop/disable).
 Desinstalación de paquetes (apt-get remove --purge).
 
 Logs de desinstalación en /var/log/opensoc_uninstall.log.
+
+
+OPENSOCLOG SERVER para VPS 
+
+OpenSOC Log Server es una versión ligera y modular de OpenSOC diseñada para VPS. Su función principal es centralizar y recibir logs de sistemas y servicios, almacenarlos y ofrecer visualización y control a través de un menú web interactivo.
+
+Componentes principales
+
+Rsyslog
+
+Recibe logs locales y remotos vía UDP/TCP (puerto 514).
+
+Centraliza todos los logs en /var/log/opensoc/opensoc.log.
+
+Grafana
+
+Dashboard web para visualización de logs y métricas.
+
+Puerto web: 3000.
+
+Loki
+
+Motor de almacenamiento de logs optimizado para Grafana.
+
+Ligero, sin la sobrecarga de ELK Stack.
+
+Promtail
+
+Agente que lee los archivos de logs y los envía a Loki.
+
+Escucha en /var/log/opensoc/*.log.
+
+Menú Web en Flask
+
+Interfaz simple en http://<IP_DEL_SERVIDOR>:1337.
+
+Funciones: iniciar/detener servicios y descargar logs.
+
+Totalmente independiente de Grafana; solo controla servicios y facilita acceso a logs.
